@@ -42,3 +42,29 @@ email.addEventListener('keyup',function(){
         setSuccess(email);
     }
 })
+const isPass=(password)=>{
+    let pass=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=-\?;,./{}|\":<>\[\]\\\' ~_]).{8,}/;
+    return pass.test(password);
+}
+password.addEventListener('keyup',function(){
+    passwordValue=password.value.trim();
+    if(passwordValue==''){
+        setError(password,'Password not empty.');
+    }else if(!isPass(passwordValue)){
+        setError(password,'Password have (A-Z,a-z,0-9,*@#$%) 8 charactor or more than.')
+    }else{
+        setSuccess(password)
+    }
+})
+const show=document.querySelector('.fa-eye');
+const hide=document.querySelector('.fa-eye-slash');
+show.addEventListener('click',function(){
+    password.type="text";
+    show.style.visibility='hidden';
+    hide.style.visibility='visible';
+})
+hide.addEventListener('click',function(){
+    password.type='password';
+    hide.style.visibility='hidden';
+    show.style.visibility='visible';
+})
